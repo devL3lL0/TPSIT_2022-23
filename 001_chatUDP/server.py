@@ -39,7 +39,6 @@ def mainChatServer():
             ip = mex[2]
             port = mex[3]
             sms = mex[1]
-            msg = '>>' + mex[0] + ': ' + mex[1]
             if mex[1] == 'crg' and ip == ip_loc:
                 print("Cronologia")
                 with open(cron) as file:
@@ -48,13 +47,18 @@ def mainChatServer():
             elif (mex[1] == 'exit' or mex[1] == 'EXIT') and ip == ip_loc:
                 print("Terminazione chat")
                 running = False
+            elif mex[1] == "Si è disconnesso":
+                msg = mex[0] + ' ' + mex[1]
+            elif mex[1] == "Si è connesso":
+                msg = mex[0] + ' ' + mex[1]
             else:
+                msg = '>>' + mex[0] + ': ' + mex[1]
                 with open(cron, "a", newline="")as file:
                     writer = csv.writer(file, delimiter=",")
                     lista = (nome, ip, port, sms, data, ora)
                     writer.writerow(lista)
                     file.close()
-                print(msg)
+            print(msg)
 
 def stampaCronologia(rdr):
     dati = [(line[0], line[1], line[2], line[3], line[4], line[5]) for line in rdr if line != NULL or line != ' ']
