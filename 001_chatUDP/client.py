@@ -40,7 +40,6 @@ def mainChatClient():
                 mex = mex.encode()
                 s.sendto(mex, (ip_broadcast, PORT))
 
-
 if __name__ == "__main__":
     path = os.getcwd()
     pathM = path + "\\Chat"
