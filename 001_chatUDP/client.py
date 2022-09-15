@@ -1,6 +1,5 @@
 from socket import AF_INET, SOCK_DGRAM, socket
-import os
-import csv
+import os,csv
 
 PORT = 5000
 
@@ -41,34 +40,4 @@ def mainChatClient():
                 s.sendto(mex, (ip_broadcast, PORT))
 
 if __name__ == "__main__":
-    path = os.getcwd()
-    pathM = path + "\\Chat"
-    if os.path.exists(pathM) == False:
-        os.chdir(path)
-        os.mkdir("Chat")
-        os.chdir(pathM)
-        os.mkdir("Cronologia")
-        cron = pathM + "\\Cronologia\\Cronologia.csv"
-        ceck = os.path.isfile(cron)
-        pathM = pathM + "\\Cronologia"
-        if ceck == False:
-            os.chdir(pathM)
-            with open("Cronologia.csv", "w", newline="")as file:
-                writer = csv.writer(file, delimiter=",")
-                header = (["NOME", "INDIRIZZO_IP", "MESSAGGIO", "DATA", "ORA"])
-                writer.writerow(header)
-                file.close()
-        else:
-            cron = pathM + "\\Cronologia\\Cronologia.csv"
-            ceck = os.path.isfile(cron)
-            if ceck == False:
-                os.chdir(pathM)
-                with open("Cronologia.csv", "w", newline="")as file:
-                    writer = csv.writer(file, delimiter=",")
-                    header = (["NOME", "INDIRIZZO_IP",
-                              "MESSAGGIO", "DATA", "ORA"])
-                    writer.writerow(header)
-                    file.close()
-    else:
-        os.chdir(pathM)
     mainChatClient()
