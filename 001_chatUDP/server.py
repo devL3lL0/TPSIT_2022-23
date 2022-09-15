@@ -7,6 +7,8 @@ BUFFER_SIZE = 4096
 mystr = "ciao" # str
 # bytes
 
+
+
 # POSSIBILITÀ
 # LocalHOST = "127.0.0.1"
 # HOST = "192.168.37.1"
@@ -29,6 +31,7 @@ def mainChatServer():
         print('In ascolto')
         path = os.getcwd()
         cron = path + "\\Cronologia.csv"
+        ONLINE = 0
         while running == True:
             msg = s.recvfrom(BUFFER_SIZE)
             msg = msg[0].decode()
@@ -39,7 +42,7 @@ def mainChatServer():
             ip = mex[2]
             port = mex[3]
             sms = mex[1]
-            if mex[1] == 'crg' and ip == ip_loc:
+            if mex[1] == 'crg' and ip == ip_loc: # NON FUNZIONANTE
                 print("Cronologia")
                 with open(cron) as file:
                     reader = csv.reader(file, delimiter=",")
@@ -49,8 +52,11 @@ def mainChatServer():
                 running = False
             elif mex[1] == "Si è disconnesso":
                 msg = mex[0] + ' ' + mex[1]
+                if ONLINE > 0:
+                    ONLINE = ONLINE - 1
             elif mex[1] == "Si è connesso":
                 msg = mex[0] + ' ' + mex[1]
+                ONLINE = ONLINE + 1
             else:
                 msg = '>>' + mex[0] + ': ' + mex[1]
                 with open(cron, "a", newline="")as file:
@@ -58,8 +64,14 @@ def mainChatServer():
                     lista = (nome, ip, port, sms, data, ora)
                     writer.writerow(lista)
                     file.close()
-            print(msg)
+            if ONLINE == 0:
+                print(msg)
+                print('Chat terminata')
+                running = False
+            else:
+                print(msg)
 
+# NON FUNZIONANTE       
 def stampaCronologia(rdr):
     dati = [(line[0], line[1], line[2], line[3], line[4], line[5]) for line in rdr if line != NULL or line != ' ']
     print(dati)
