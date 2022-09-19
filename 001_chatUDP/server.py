@@ -9,6 +9,7 @@ BUFFER_SIZE = 4096
 HOST = "0.0.0.0"
 PORT = 5000
 
+# OTTENGO L'IP TRAMITE SOCKET
 def get_ip_locale():
     s = socket(AF_INET, SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
@@ -17,6 +18,7 @@ def get_ip_locale():
     s.close()
     return ip_loc
 
+# FUNZION
 def mainChatServer():
     ip_loc = get_ip_locale()
     running = True
@@ -36,11 +38,7 @@ def mainChatServer():
             ip = mex[2]
             port = mex[3]
             sms = mex[1]
-            '''if mex[1] == 'crg' and ip == ip_loc: # NON FUNZIONANTE
-                print("Cronologia")
-                with open(cron) as file:
-                    reader = csv.reader(file, delimiter=",")
-                stampaCronologia(reader)'''
+            ''''''
             if (mex[1] == 'exit' or mex[1] == 'EXIT') and ip == ip_loc:
                 print("Terminazione chat")
                 running = False
@@ -68,9 +66,15 @@ def mainChatServer():
                 print(msg)
 
 # NON FUNZIONANTE       
-'''def stampaCronologia(rdr):
+'''
+def stampaCronologia(rdr):
     dati = [(line[0], line[1], line[2], line[3], line[4], line[5]) for line in rdr if line != null or line != ' ']
-    print(dati)'''
+    print(dati)
+if mex[1] == 'crg' and ip == ip_loc: # NON FUNZIONANTE
+                print("Cronologia")
+                with open(cron) as file:
+                    reader = csv.reader(file, delimiter=",")
+                stampaCronologia(reader)'''
     
 if __name__ == "__main__":
     path = os.getcwd()
