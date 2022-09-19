@@ -18,7 +18,7 @@ def get_ip_locale():
     s.close()
     return ip_loc
 
-# FUNZION
+# FUNZIONE
 def mainChatServer():
     ip_loc = get_ip_locale()
     running = True
