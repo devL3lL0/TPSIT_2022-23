@@ -34,7 +34,6 @@ class Packet:
 
 
 def main():
-
     # TEST UNITARI
     ut1 = Packet("Mario", "Hello world")
     pkt = Packet.from_Bytes(ut1.to_bytes())
