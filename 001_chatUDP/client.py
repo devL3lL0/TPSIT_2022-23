@@ -1,8 +1,10 @@
 from socket import AF_INET, SOCK_DGRAM, socket
 import os,csv
+from packet import Packet
 
 PORT = 5000
 
+# OTTENGO L'IP LOCALE DEL CLIENT
 def get_ip_locale():
     s = socket(AF_INET, SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
@@ -11,7 +13,7 @@ def get_ip_locale():
     s.close()
     return ip_loc
 
-
+# SETTO L'IP DI BROADCAST DELLA RETE
 def set_ip_broadcast(ip):
     ip = ip.split('.')
     ip_broadcast = ip[0] + '.' + ip[1] + '.' + ip[2] + '.' + '255'
