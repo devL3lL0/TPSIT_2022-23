@@ -1,5 +1,7 @@
 from socket import AF_INET, SOCK_DGRAM, socket
-import os, csv, time, packet
+import os, csv, time
+from packet import Packet
+
 
 BUFFER_SIZE = 4096
 
@@ -8,6 +10,7 @@ BUFFER_SIZE = 4096
 # HOST = "192.168.37.1"
 HOST = "0.0.0.0"
 PORT = 5000
+
 
 # OTTENGO L'IP TRAMITE SOCKET
 def get_ip_locale():
