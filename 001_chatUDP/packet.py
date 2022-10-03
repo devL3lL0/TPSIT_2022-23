@@ -1,8 +1,5 @@
 # | 1 byte (#username) | username | 2 byte (#message) | message
 
-from tkinter import Pack
-
-
 class Packet:
     def __init__(self, username, message):
         self.username = username
