@@ -7,9 +7,8 @@ def chatClient():
         # connetto il client al server
         # come indirizzo utilizzo il localhost
         s.connect(address)
-        while True:
         # invio dei dati e codico in utf-8
-            s.send("avanti".encode())
+        s.send("avanti".encode())
 
         # chiudo la connessione
         s.close()  
