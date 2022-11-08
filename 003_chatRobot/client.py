@@ -1,17 +1,19 @@
 from socket import AF_INET, SOCK_STREAM, socket
 
 def chatClient():
+    addres = str(input("Inserire l'ip del robot: "))
     with socket(AF_INET, SOCK_STREAM) as s:
-        address = ("127.0.0.1", 3450)
+        address = (addres, 3450)
         print(address)
-        # connetto il client al server
-        # come indirizzo utilizzo il localhost
+        running = True
         s.connect(address)
-        # invio dei dati e codico in utf-8
-        s.send("avanti".encode())
-
-        # chiudo la connessione
-        s.close()  
+        while running == True:
+            msg = str(input("Inserire il comando: "))
+            msg = msg.upper()
+            if msg == 'E':
+                running = False
+            else:
+                s.send(msg.encode('utf8'))
 
 
 if __name__ == "__main__":
